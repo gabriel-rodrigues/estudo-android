@@ -22,7 +22,7 @@ public class Pontuacao {
     }
 
     public void contabilizar() {
-        this.som.tocar(Som.PONTUACAO);
+        this.som.tocar();
         ++this.pontos;
     }
 

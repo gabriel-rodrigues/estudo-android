@@ -30,7 +30,6 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
     private VerificadorDeColisao verificadorDeColisao;
 
     private final Context contexto;
-    private final Som som;
     private final Tempo tempo;
 
 
@@ -41,9 +40,9 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
         super(context);
         this.contexto = context;
         this.tela     = new Tela(context);
-        this.som      = new Som(context);
         this.tempo    = new Tempo();
         this.inicializarElementos();
+
 
         this.setOnTouchListener(this);
     }
@@ -54,10 +53,9 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
         this.background = Bitmap.createScaledBitmap(backgroundAuxiliar, backgroundAuxiliar.getWidth(), tela.getAltura(),false);
 
 
-        this.passaro = new Passaro(this.contexto, this.tela, this.som, this.tempo);
+        this.passaro   = new Passaro(this.contexto, this.tela, this.tempo);
 
-
-        this.pontuacao = new Pontuacao(this.som);
+        this.pontuacao = new Pontuacao(new SomPontuacao(this.contexto));
         this.canos     = new Canos(this.contexto, this.tela, this.pontuacao);
 
         this.verificadorDeColisao = new VerificadorDeColisao(this.passaro, this.canos);
@@ -82,7 +80,9 @@ public class Game extends SurfaceView implements Runnable, View.OnTouchListener 
             this.pontuacao.desenharNo(canvas);
 
             if(this.verificadorDeColisao.temColisao()) {
-                this.som.tocar(Som.COLISAO);
+                Som som = new SomColisao(this.contexto);
+                som.tocar();
+
                 new GameOver(this.tela).desenharNo(canvas);
                 this.cancelar();
             }

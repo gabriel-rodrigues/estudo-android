@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 
 import br.com.apesoftware.jumper.R;
 import br.com.apesoftware.jumper.engine.Som;
+import br.com.apesoftware.jumper.engine.SomPulo;
 import br.com.apesoftware.jumper.engine.Tela;
 import br.com.apesoftware.jumper.engine.Tempo;
 
@@ -29,10 +30,10 @@ public class Passaro {
 
     private Som som;
 
-    public Passaro(Context contexto, Tela tela, Som som, Tempo tempo) {
+    public Passaro(Context contexto, Tela tela, Tempo tempo) {
         this.altura = 100;
         this.tela   = tela;
-        this.som    = som;
+        this.som    = new SomPulo(contexto);
         this.tempo  = tempo;
 
         Bitmap bp    = BitmapFactory.decodeResource(contexto.getResources(), R.drawable.passaro);
@@ -56,7 +57,7 @@ public class Passaro {
     public void pular() {
 
         if(this.altura > RAIO) {
-            this.som.tocar(Som.PULO);
+            this.som.tocar();
             this.tempo.reiniciar();
         }
     }

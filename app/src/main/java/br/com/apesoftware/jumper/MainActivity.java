@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
 
         FrameLayout container = (FrameLayout)findViewById(R.id.container);
 
-        this.games  = new Game(this);
+        this.game  = new Game(this);
         container.addView(this.game);
     }
 

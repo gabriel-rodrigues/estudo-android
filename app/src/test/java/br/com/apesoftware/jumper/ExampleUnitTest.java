@@ -12,11 +12,4 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
-
-    @Test
-    public void subtrair_isCorreto() throws Exception {
-        // Apenas para testar o servidor de integracao continua
-        assertEquals(4, 20-10);
-    }
-
 }
